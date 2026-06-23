@@ -20,6 +20,7 @@ export default defineConfig({
       'X-Contracts-ClientId': process.env.X_CONTRACTS_CLIENT_ID ?? '',
       'X-Contracts-APIKey': process.env.X_CONTRACTS_API_KEY ?? '',
       'X-Contracts-Secret': process.env.SECRET_KEY ?? '',
+      'X-Contracts-Signature': process.env.X_CONTRACTS_SIGNATURE ?? '',
     },
     ignoreHTTPSErrors: true,
   },

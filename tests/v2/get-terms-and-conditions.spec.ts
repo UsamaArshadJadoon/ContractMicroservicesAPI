@@ -18,6 +18,8 @@ test.describe.serial('V2 GetTermsAndConditions', () => {
     });
 
     expect(upload.status()).toBe(200);
+    const uploadBody = await upload.json();
+    expect(uploadBody.succeeded).toBe(true);
   });
 
   test('GET V2 GetTermsAndConditions — returns 200 with terms content', async ({ request }) => {

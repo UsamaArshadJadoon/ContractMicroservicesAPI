@@ -19,6 +19,7 @@ test('POST V3 UploadContractTemplate — returns 200 with contractNumber in resp
   expect(response.status()).toBe(200);
 
   const body = await response.json();
-  expect(body).toHaveProperty('contractNumber');
-  expect(body.contractNumber).toBe(contractNumber);
+  expect(body.succeeded).toBe(true);
+  expect(body.data).toHaveProperty('contractNumber');
+  expect(body.data.contractNumber).toBe(contractNumber);
 });

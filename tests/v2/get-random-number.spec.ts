@@ -18,6 +18,8 @@ test.describe.serial('V2 GetRandomNumber', () => {
     });
 
     expect(upload.status()).toBe(200);
+    const uploadBody = await upload.json();
+    expect(uploadBody.succeeded).toBe(true);
   });
 
   test('GET V2 GetRandomNumber — returns 200 with OTP/token in response', async ({ request }) => {
@@ -31,7 +33,6 @@ test.describe.serial('V2 GetRandomNumber', () => {
     expect(response.status()).toBe(200);
 
     const body = await response.json();
-    // Response should include some form of random/OTP value
     expect(body).toBeTruthy();
   });
 });
