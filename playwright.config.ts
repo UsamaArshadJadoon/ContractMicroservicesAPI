@@ -15,12 +15,12 @@ export default defineConfig({
     ['junit', { outputFile: 'test-results/results.xml' }],
   ],
   use: {
-    baseURL: process.env.MICRO_URL ?? 'https://ms-sb.contracts.com.sa',
+    baseURL: (process.env.MICRO_URL || 'https://ms-sb.contracts.com.sa').trim(),
     extraHTTPHeaders: {
-      'X-Contracts-ClientId': process.env.X_CONTRACTS_CLIENT_ID ?? '',
-      'X-Contracts-APIKey': process.env.X_CONTRACTS_API_KEY ?? '',
-      'X-Contracts-Secret': process.env.SECRET_KEY ?? '',
-      'X-Contracts-Signature': process.env.X_CONTRACTS_SIGNATURE ?? '',
+      'X-Contracts-ClientId': (process.env.X_CONTRACTS_CLIENT_ID ?? '').trim(),
+      'X-Contracts-APIKey': (process.env.X_CONTRACTS_API_KEY ?? '').trim(),
+      'X-Contracts-Secret': (process.env.SECRET_KEY ?? '').trim(),
+      'X-Contracts-Signature': (process.env.X_CONTRACTS_SIGNATURE ?? '').trim(),
     },
     ignoreHTTPSErrors: true,
   },
