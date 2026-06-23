@@ -36,6 +36,7 @@ jobs:
           X_CONTRACTS_CLIENT_ID: ${{ secrets.X_CONTRACTS_CLIENT_ID }}
           X_CONTRACTS_API_KEY: ${{ secrets.X_CONTRACTS_API_KEY }}
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          X_CONTRACTS_SIGNATURE: ${{ secrets.X_CONTRACTS_SIGNATURE }}
         run: npm test
 
       - name: Upload HTML report
