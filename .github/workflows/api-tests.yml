@@ -1,0 +1,55 @@
+name: API Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: '0 2 * * *'
+
+jobs:
+  test:
+    name: Playwright API Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Run API tests
+        env:
+          MICRO_URL: ${{ secrets.MICRO_URL }}
+          X_CONTRACTS_CLIENT_ID: ${{ secrets.X_CONTRACTS_CLIENT_ID }}
+          X_CONTRACTS_API_KEY: ${{ secrets.X_CONTRACTS_API_KEY }}
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        run: npm test
+
+      - name: Upload HTML report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report-${{ github.run_id }}
+          path: playwright-report/
+          retention-days: 30
+
+      - name: Upload JUnit report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: junit-results-${{ github.run_id }}
+          path: test-results/results.xml
+          retention-days: 30
